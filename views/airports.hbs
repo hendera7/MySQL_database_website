@@ -1,0 +1,60 @@
+<!-- airports.hbs -->
+<h1>Airports</h1>
+<br>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data--}}
+{{!-- Displays Airports data as a table --}}
+<table>
+    <thead>
+        {{!-- Dynamically prints the attribute names as the header of the table --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Dynamically fills each row of the table with the data from the coresponding entity --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.airport_id}}</td>
+            <td>{{this.country}}</td>
+            <td>{{this.city}}</td>
+            <td>{{this.shuttle_available}}</td>
+            <td>{{this.premium_lounge}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br>
+<br>
+<h2>Add a new Airport</h2>
+
+<form id="add_airport" method="POST" action="/add_airport">
+    <label for="in-airport_id">Airport ID:</label>
+    <input type="text" name="in-airport_id" id="in-airport_id">
+    <label for="in-country">Country:</label>
+    <input type="text" name="in-country" id="in-country">
+    <label for="in-city">City:</label>
+    <input type="text" name="in-city" id="in-city">
+    <label for="in-shuttle_available">Shuttle Available:</label>
+    <select name="in-shuttle_available" id="in-shuttle_available">
+        <option value="">Select if Shuttle is Available</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+    <label for="in-premium_lounge">Premium Lounge:</label>
+    <select name="in-premium_lounge" id="in-premium_lounge">
+        <option value="">Select if Premium Lounge is Available</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+    <input type="submit">
+</form>
+
+<p><a href="/">Home</a></p>

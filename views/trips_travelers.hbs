@@ -1,0 +1,100 @@
+<!-- trips_travelers.hbs -->
+<h1>Trips and Their Associated Travelers</h1>
+<br>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data--}}
+{{!-- Displays Trips_Travelers data as a table --}}
+<table>
+    <thead>
+        {{!-- Dynamically prints the attribute names as the header of the table --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Dynamically fills each row of the table with the data from the coresponding entity by cycling through #each row and printing the called out data --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.trips_travelers_id}}</td>
+            <td>{{this.trip_id}}</td>
+            <td>{{this.arrival}}</td>
+            <td>{{this.departure}}</td>
+            <td>{{this.name}}</td>
+            {{!-- Add DELETE button to delete row from intersect table --}}
+            <td><form id="delete_trip_traveler" method="POST" action="/delete_trip_traveler">
+            <button type="submit" name="in-trips_traveler_id" value={{this.trips_travelers_id}}>Delete</button></form></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br>
+<br>
+<h2>Add a new Traveler to a Trip</h2>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+<form id="add_trip_traveler" method="POST" action="/add_trip_traveler">
+    {{!-- Citation for the following function:
+    Date 2/22/23
+    Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box --}}
+    <label for="in-trip_id">Trip ID:</label>
+    <select name="in-trip_id" id="in-trip_id">
+        <option value="">Select a Trip</option>
+        {{#each trips}}
+        <option value="{{this.trip_id}}">{{this.trip_id}}</option>
+        {{/each}}
+    </select>
+    <label for="in-traveler_id">Traveler ID:</label>
+    <select name="in-traveler_id" id="in-traveler_id">
+        <option value="">Select a Traveler</option>
+        {{#each travelers}}
+        <option value="{{this.traveler_id}}">{{this.full_name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>
+
+<br>
+<br>
+<h2>Update a Trip's Traveler</h2>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+<form id="update_trip_traveler" method="POST" action="/update_trip_traveler">
+    {{!-- Citation for the following function:
+    Date 2/22/23
+    Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box --}}
+    <label for="in-trips_travelers_id">Trip Traveler ID:</label>
+    <select name="in-trips_travelers_id" id="in-trips_travelers_id">
+        <option value="">Select a Trip Traveler pair</option>
+        {{#each data}}
+        <option value="{{this.trips_travelers_id}}">{{this.trips_travelers_id}}</option>
+        {{/each}}
+    </select>
+    <label for="in-trip_id">Trip ID:</label>
+    <select name="in-trip_id" id="in-trip_id">
+        <option value="">Select a Trip</option>
+        {{#each trips}}
+        <option value="{{this.trip_id}}">{{this.trip_id}}</option>
+        {{/each}}
+    </select>
+    <label for="in-traveler_id">Traveler ID:</label>
+    <select name="in-traveler_id" id="in-traveler_id">
+        <option value="">Select a Traveler</option>
+        {{#each travelers}}
+        <option value="{{this.traveler_id}}">{{this.full_name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>
+
+<p><a href="/">Home</a></p>

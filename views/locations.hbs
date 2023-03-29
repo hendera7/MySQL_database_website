@@ -1,0 +1,61 @@
+<!-- locations.hbs -->
+<h1>Locations</h1>
+<br>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data--}}
+{{!-- Displays Locations data as a table --}}
+<table>
+    <thead>
+        {{!-- Dynamically prints the attribute names as the header of the table --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Dynamically fills each row of the table with the data from the coresponding entity --}}        {{#each data}}
+        <tr>
+            <td>{{this.location_id}}</td>
+            <td>{{this.country}}</td>
+            <td>{{this.city}}</td>
+            <td>{{this.airport_id}}</td>
+            <td>{{this.vaccine_required}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br>
+<br>
+<h2>Add a new Location</h2>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+<form id="add_location" method="POST" action="/add_location">
+    <label for="in-location_id">Location ID:</label>
+    <input type="text" name="in-location_id" id="in-location_id">
+    <label for="in-country">Country:</label>
+    <input type="text" name="in-country" id="in-country">
+    <label for="in-city">City:</label>
+    <input type="text" name="in-city" id="in-city">
+    {{!-- Citation for the following function:
+    Date 2/22/23
+    Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box --}}
+    <label for="in-airport_id">Airport:</label>
+    <select name="in-airport_id" id="in-airport_id">
+        <option value="">Select an Airport</option>
+        {{#each airports}}
+        <option value="{{this.airport_id}}">{{this.airport_id}}</option>
+        {{/each}}
+    </select>
+    <label for="in-vaccine_required">Vaccine Required:</label>
+    <input type="text" name="in-vaccine_required" id="in-vaccine_required">
+    <input type="submit">
+</form>
+

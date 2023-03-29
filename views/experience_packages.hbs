@@ -1,0 +1,53 @@
+<!-- experience_packages.hbs -->
+<h1>Experience Packages</h1>
+<br>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data--}}
+{{!-- Displays Experience_Packages data as a table --}}
+<table>
+    <thead>
+        <tr>
+            {{!-- Dynamically prints the attribute names as the header of the table --}}
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Dynamically fills each row of the table with the data from the coresponding entity --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.experience_id}}</td>
+            <td>{{this.cost}}</td>
+            <td>{{this.all_inclusive}}</td>
+            <td>{{this.description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br>
+<br>
+<h2>Add a new Experience Package</h2>
+
+<form id="add_EP" method="POST" action="/add_EP">
+    <label for="in-experience_id">Experience Package ID:</label>
+    <input type="text" name="in-experience_id" id="in-experience_id">
+    <label for="in-cost">Cost:</label>
+    <input type="text" name="in-cost" id="in-cost">
+    <label for="in-all_inclusive">All Inclusive:</label>
+    <select name="in-all_inclusive" id="in-all_inclusive">
+        <option value="">Select if All-Inclusive</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+    <label for="in-description">Description:</label>
+    <input type="text" name="in-description" id="in-description">
+    <input type="submit">
+</form>
+
+<p><a href="/">Home</a></p>

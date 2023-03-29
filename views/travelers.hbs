@@ -1,0 +1,64 @@
+<!-- travelers.hbs -->
+<h1>Travelers</h1>
+<br>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data--}}
+{{!-- Displays Travelers data as a table --}}
+<table>
+    <thead>
+        {{!-- Dynamically prints the attribute names as the header of the table --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Dynamically fills each row of the table with the data from the coresponding entity --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.traveler_id}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.age}}</td>
+            <td>{{this.phone_number}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.passport_country}}</td>
+            <td>{{this.vaccines_updated}}</td>
+            <td>{{this.preferred_airline}}</td>
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br>
+<br>
+<h2>Add a new Traveler</h2>
+
+<form id="add_traveler" method="POST" action="/add_traveler">
+    <label for="in-name">Name:</label>
+    <input type="text" name="in-name" id="in-name">
+    <label for="in-age">age:</label>
+    <input type="text" name="in-age" id="in-age">
+    <label for="in-phone_number">Phone Number:</label>
+    <input type="text" name="in-phone_number" id="in-phone_number">
+    <label for="in-email">Email:</label>
+    <input type="text" name="in-email" id="in-email">
+    <label for="in-passport_country">Passport Country:</label>
+    <input type="text" name="in-passport_country" id="in-passport_country">
+    <label for="in-vaccines_updated">Vaccinated:</label>
+    <select name="in-vaccines_updated" id="in-vaccines_updated">
+        <option value="">Select if Vaccinated</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+    <label for="in-preferred_airline">Preferred Airline:</label>
+    <input type="text" name="in-preferred_airline" id="in-preferred_airline">
+    <input type="submit">
+</form>
+
+<p><a href="/">Home</a></p>

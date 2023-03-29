@@ -1,0 +1,110 @@
+<!-- trips.hbs -->
+<h1>Trips</h1>
+<br>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data--}}
+{{!-- Displays Trips data as a table --}}
+<table>
+    <thead>
+        <tr>
+            {{!-- Dynamically prints the attribute names as the header of the table --}}
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+    <tbody>
+        {{!-- Dynamically fills each row of the table with the data from the coresponding entity --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.trip_id}}</td>
+            <td>{{this.date_of_arrival}}</td>
+            <td>{{this.date_of_departure}}</td>
+            <td>{{this.experience_id}}</td>
+            <td>{{this.location_id}}</td>
+            <td><form id="delete_trip" method="POST" action="/delete_trip">
+            <button type="submit" name="in-trip_id" value={{this.trip_id}}>Delete</button></form></td>
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<br>
+<br>
+<h2>Add a new Trip</h2>
+
+{{!-- Citation for the following function:
+Date 2/22/23
+Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data --}}
+<form id="add_trip" method="POST" action="/add_trip">
+    <label for="in-date_of_arrival">Date of Arrival:</label>
+    <input type="date" name="in-date_of_arrival" id="in-date_of_arrival">
+    <label for="in-date_of_departure">Date of Departure:</label>
+    <input type="date" name="in-date_of_departure" id="in-date_of_departure">
+    {{!-- Citation for the following function:
+    Date 2/22/23
+    Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box --}}
+    <label for="in-experience_id">Experience ID:</label>
+    <select name="in-experience_id" id="in-experience_id">
+        <option value="">Select an Experience</option>
+        {{#each experiences}}
+        <option value="{{this.experience_id}}">{{this.experience_id}}</option>
+        {{/each}}
+        <option value=NULL>None</option>
+    </select>
+    <label for="in-location_id">Location ID:</label>
+    <select name="in-location_id" id="in-location_id">
+        <option value="">Select a Location</option>
+        {{#each locations}}
+        <option value="{{this.location_id}}">{{this.location_id}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>
+
+<br>
+<br>
+<h2>Update a Trip</h2>
+
+<form id="update_trip" method="POST" action="/update_trip">
+    {{!-- Citation for the following function:
+    Date 2/22/23
+    Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box --}}
+    <label for="in-trip_id">Trip ID:</label>
+    <select name="in-trip_id" id="in-trip_id">
+        <option value="">Select a trip_id</option>
+        {{#each data}}
+        <option value="{{this.trip_id}}">{{this.trip_id}}</option>
+        {{/each}}
+    </select>
+    <label for="in-date_of_arrival">Date of Arrival:</label>
+    <input type="date" name="in-date_of_arrival" id="in-date_of_arrival">
+    <label for="in-date_of_departure">Date of Departure:</label>
+    <input type="date" name="in-date_of_departure" id="in-date_of_departure">
+    {{!-- Citation for the following function:
+    Date 2/22/23
+    Addapted from https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%206%20-%20Dynamically%20Filling%20Dropdowns%20and%20Adding%20a%20Search%20Box --}}
+    <label for="in-experience_id">Experience ID:</label>
+    <select name="in-experience_id" id="in-experience_id">
+        <option value="">Select an Experience</option>
+        {{#each experiences}}
+        <option value="{{this.experience_id}}">{{this.experience_id}}</option>
+        {{/each}}
+        <option value=NULL>None</option>
+    </select>
+    <label for="in-location_id">Location ID:</label>
+    <select name="in-location_id" id="in-location_id">
+        <option value="">Select a Location</option>
+        {{#each locations}}
+        <option value="{{this.location_id}}">{{this.location_id}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+</form>
+
+<p><a href="/">Home</a></p>
